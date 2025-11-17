@@ -22,6 +22,6 @@ require("lze").load({
     require("plugins/plenary"),
     require("plugins/startuptime"),
     require("plugins/mini"),
+    require("plugins/git"),
     --   require 'plugins/dap',
-    --   require 'plugins/git',
 })
