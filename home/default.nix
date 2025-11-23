@@ -13,7 +13,7 @@
     ./programs/kitty.nix
     ./programs/neovim
     ./programs/tmux.nix
-    ./programs/waybar.nix
+    ./programs/waybar
     ./programs/tofi.nix
 
     ./modules/fonts.nix
