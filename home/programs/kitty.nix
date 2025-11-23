@@ -6,5 +6,9 @@
       name = "Iosevka";
       size = 12.0;
     };
+
+    settings = {
+      disable_ligatures = "always";
+    };
   };
 }
