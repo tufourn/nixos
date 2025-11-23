@@ -68,6 +68,8 @@
         "waybar"
       ];
 
+      monitor = ", preferred, auto, 1";
+
       bindl = [
         ",switch:off:Lid Switch, exec, loginctl lock-session"
       ];
