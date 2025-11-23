@@ -17,6 +17,7 @@
     ./programs/tofi.nix
 
     ./modules/fonts.nix
+    ./modules/i18n.nix
     ./modules/git.nix
     ./modules/packages.nix
   ];
