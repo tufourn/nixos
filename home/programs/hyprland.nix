@@ -27,7 +27,7 @@
         "$mod, Q, killactive,"
         "$mod, F, exec, firefox"
 
-        "$mod, D, exec, tofi-run"
+        "$mod, D, exec, tofi-run | xargs hyprctl dispatch exec"
 
         "$mod, h, movefocus, l"
         "$mod, l, movefocus, r"

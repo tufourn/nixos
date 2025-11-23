@@ -10,6 +10,8 @@
       tmuxPlugins.sensible
       tmuxPlugins.better-mouse-mode
       tmuxPlugins.catppuccin
+      tmuxPlugins.resurrect
+      tmuxPlugins.continuum
     ];
 
     extraConfig = ''
