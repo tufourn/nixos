@@ -27,6 +27,8 @@
         "$mod, Q, killactive,"
         "$mod, F, exec, firefox"
 
+        "$mod, D, exec, tofi-run"
+
         "$mod, h, movefocus, l"
         "$mod, l, movefocus, r"
         "$mod, k, movefocus, u"

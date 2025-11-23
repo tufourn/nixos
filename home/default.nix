@@ -14,6 +14,7 @@
     ./programs/neovim
     ./programs/tmux.nix
     ./programs/waybar.nix
+    ./programs/tofi.nix
 
     ./modules/fonts.nix
     ./modules/git.nix

@@ -3,12 +3,15 @@ local M = {
     opts = {
         picker = { enabled = true },
         quickfile = { enabled = true },
+        image = { enabled = true },
+        bigfile = { enabled = true },
+        words = { enabled = true },
     },
     keys = {
         -- commonly used
         { "<leader><leader>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
         { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
-        { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
+        { "<leader>/", function() Snacks.picker.lines() end, desc = "Search Buffer" },
         -- undo
         { "<leader>u", function() Snacks.picker.undo() end, desc = "Toggle [U]ndotree" },
         -- aerial

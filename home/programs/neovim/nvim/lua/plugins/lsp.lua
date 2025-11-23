@@ -38,7 +38,7 @@ local M = {
                     },
                     signatureHelp = { enabled = true },
                     diagnostics = {
-                        globals = { "nixCats", "vim" },
+                        globals = { "nixCats", "vim", "Snacks" },
                         disable = { "missing-fields" },
                     },
                     telemetry = { enabled = false },
