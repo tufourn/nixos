@@ -1,11 +1,12 @@
 {pkgs, ...}: {
-  programs.firefox = {
+  programs.librewolf = {
     enable = true;
     policies = {
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
       DisableFirefoxAccounts = true;
       DisableAccounts = true;
+      DisablePocket = true;
       DisplayBookmarksToolbar = "never";
       EnableTrackingProtection = {
         Value = true;
@@ -20,6 +21,11 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4598854/latest.xpi";
           installation_mode = "force_installed";
         };
+        # Skip Redirect
+        "skipredirect@sblask" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/3920533/latest.xpi";
+          installation_mode = "force_installed";
+        };
         # Bitwarden
         "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4599707/latest.xpi";
@@ -30,7 +36,18 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4598130/latest.xpi";
           installation_mode = "force_installed";
         };
+        # Reddit Enhancement Suite
+        "jid1-xUfzOsOFlzSOXg@jetpack" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4424459/latest.xpi";
+          installation_mode = "force_installed";
+        };
+        # Old Reddit Redirect
+        "{9063c2e9-e07c-4c2c-9646-cfe7ca8d0498}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4526031/latest.xpi";
+          installation_mode = "force_installed";
+        };
       };
+
       Preferences = {
         "browser.uidensity" = {
           Value = 1;
@@ -44,7 +61,7 @@
           Value = false;
           Status = "locked";
         };
-        "browser.startup.page" = {Value = 3;}; # Restore previous session
+        "browser.startup.page" = {Value = 3;};
         "browser.topsites.contile.enabled" = {
           Value = false;
           Status = "locked";
@@ -102,6 +119,58 @@
           Status = "locked";
         };
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = {
+          Value = false;
+          Status = "locked";
+        };
+        "cookiebanners.service.mode.privateBrowsing" = {
+          Value = 2;
+          Status = "locked";
+        };
+        "cookiebanners.service.mode" = {
+          Value = 2;
+          Status = "locked";
+        };
+        "privacy.donottrackheader.enabled" = {
+          Value = true;
+          Status = "locked";
+        };
+        "privacy.fingerprintingProtection" = {
+          Value = true;
+          Status = "locked";
+        };
+        "privacy.resistFingerprinting" = {
+          Value = true;
+          Status = "locked";
+        };
+        "privacy.trackingprotection.emailtracking.enabled" = {
+          Value = true;
+          Status = "locked";
+        };
+        "privacy.trackingprotection.enabled" = {
+          Value = true;
+          Status = "locked";
+        };
+        "privacy.trackingprotection.fingerprinting.enabled" = {
+          Value = true;
+          Status = "locked";
+        };
+        "privacy.trackingprotection.socialtracking.enabled" = {
+          Value = true;
+          Status = "locked";
+        };
+        "signon.rememberSignons" = {
+          Value = false;
+          Status = "locked";
+        };
+        "signon.autofillForms" = {
+          Value = false;
+          Status = "locked";
+        };
+        "signon.autofillForms.http" = {
+          Value = false;
+          Status = "locked";
+        };
+        "signon.storeWhenAutocompleteOff" = {
           Value = false;
           Status = "locked";
         };

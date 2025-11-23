@@ -8,7 +8,7 @@
   home.homeDirectory = "/home/tufourn";
 
   imports = [
-    ./programs/firefox.nix
+    ./programs/librewolf.nix
     ./programs/hyprland.nix
     ./programs/kitty.nix
     ./programs/neovim
