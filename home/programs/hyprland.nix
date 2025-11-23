@@ -1,7 +1,62 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     hyprlock
+    hypridle
   ];
+
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      animations.enabled = false;
+
+      background = {
+        path = "color";
+        color = "rgb(30, 30, 40)";
+      };
+
+      input-field = [
+        {
+          size = "400, 50";
+          fade_on_empty = false;
+          font_color = "rgb(202, 211, 245)";
+          inner_color = "rgb(91, 96, 120)";
+          outer_color = "rgb(24, 25, 38)";
+          outline_thickness = 5;
+        }
+      ];
+    };
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+      };
+      listener = [
+        {
+          timeout = 150;
+          on-timeout = "brightnessctl -s set 10";
+          on-resume = "brightnessctl -r";
+        }
+        {
+          timeout = 300;
+          on-timeout = "loginctl lock-session";
+        }
+        {
+          timeout = 330;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on && brightnessctl -r";
+        }
+        {
+          timeout = 1800;
+          on-timeout = "systemctl suspend";
+        }
+      ];
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -9,7 +64,27 @@
     portalPackage = null;
     settings = {
       "$mod" = "SUPER";
-      "exec-once" = "waybar";
+      "exec-once" = [
+        "waybar"
+      ];
+
+      bindl = [
+        ",switch:off:Lid Switch, exec, loginctl lock-session"
+      ];
+
+      general = {
+        resize_on_border = true;
+        border_size = 0;
+        gaps_out = 0;
+        gaps_in = 2;
+      };
+
+      decoration = {
+        dim_inactive = true;
+        dim_strength = 0.1;
+        blur.enabled = false;
+        shadow.enabled = false;
+      };
 
       animations.enabled = false;
 
@@ -23,10 +98,7 @@
 
       bind = [
         "$mod, Return, exec, kitty"
-
         "$mod, Q, killactive,"
-        "$mod, F, exec, firefox"
-
         "$mod, D, exec, tofi-run | xargs hyprctl dispatch exec"
 
         "$mod, h, movefocus, l"
