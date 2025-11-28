@@ -1,7 +1,32 @@
 {pkgs, ...}: {
   programs.librewolf = {
     enable = true;
+    settings = {
+      "middlemouse.paste" = false;
+      "full-screen-api.transition-duration.enter" = "0 0";
+      "full-screen-api.transition-duration.leave" = "0 0";
+      "full-screen-api.warning.delay" = 0;
+      "full-screen-api.warning.timeout" = 0;
+      "browser.startup.page" = 3; # Restore previous session
+    };
     policies = {
+      SearchEngines = {
+        Add = [
+          {
+            Name = "Kagi";
+            URLTemplate = "https://kagi.com/search?q={searchTerms}";
+            SuggestURLTemplate = "https://kagi.com/api/autosuggest?q={searchTerms}";
+          }
+        ];
+        Default = "Kagi";
+      };
+      SearchSuggestEnabled = true;
+      Cookies = {
+        Allow = [
+          "http://kagi.com"
+          "https://kagi.com"
+        ];
+      };
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
       DisableFirefoxAccounts = true;
@@ -20,21 +45,25 @@
         "uBlock0@raymondhill.net" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4598854/latest.xpi";
           installation_mode = "force_installed";
+          private_browsing = true;
         };
         # Skip Redirect
         "skipredirect@sblask" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/3920533/latest.xpi";
           installation_mode = "force_installed";
+          private_browsing = true;
         };
         # Bitwarden
         "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4599707/latest.xpi";
           installation_mode = "force_installed";
+          private_browsing = true;
         };
         # SponsorBlock
         "sponsorBlocker@ajay.app" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4598130/latest.xpi";
           installation_mode = "force_installed";
+          private_browsing = true;
         };
         # Reddit Enhancement Suite
         "jid1-xUfzOsOFlzSOXg@jetpack" = {
@@ -61,7 +90,6 @@
           Value = false;
           Status = "locked";
         };
-        "browser.startup.page" = {Value = 3;};
         "browser.topsites.contile.enabled" = {
           Value = false;
           Status = "locked";
@@ -83,6 +111,10 @@
           Status = "locked";
         };
         "browser.urlbar.showSearchSuggestionsFirst" = {
+          Value = false;
+          Status = "locked";
+        };
+        "browser.tabs.closeWindowWithLastTab" = {
           Value = false;
           Status = "locked";
         };
@@ -171,6 +203,10 @@
           Status = "locked";
         };
         "signon.storeWhenAutocompleteOff" = {
+          Value = false;
+          Status = "locked";
+        };
+        "browser.tabs.insertRelatedAfterCurrent" = {
           Value = false;
           Status = "locked";
         };
