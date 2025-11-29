@@ -10,6 +10,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../common/global
   ];
 
   # Bootloader.
@@ -26,17 +27,6 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  time.timeZone = "Asia/Ho_Chi_Minh";
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "dvorak";
-    options = "ctrl:nocaps";
-  };
-
-  console.keyMap = "dvorak";
-
   virtualisation.docker = {
     enable = true;
   };
@@ -51,38 +41,17 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     git
     vim
     wl-clipboard
-    home-manager
   ];
 
   environment.variables.EDITOR = "vim";
 
   programs.hyprland.enable = true;
-
-  # https://nixos.wiki/wiki/Fish
-  programs.bash = {
-    interactiveShellInit = ''
-      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-      then
-        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-      fi
-    '';
-  };
-
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting # Disable greeting
-    '';
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
