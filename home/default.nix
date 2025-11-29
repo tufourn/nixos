@@ -2,10 +2,11 @@
   inputs,
   config,
   pkgs,
+  username,
   ...
 }: {
-  home.username = "tufourn";
-  home.homeDirectory = "/home/tufourn";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
 
   imports = [
     ./programs/librewolf.nix

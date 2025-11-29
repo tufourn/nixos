@@ -15,20 +15,32 @@
     nixpkgs,
     home-manager,
     ...
-  }: {
+  }: let
+    lib = nixpkgs.lib // home-manager.lib;
+    systems = ["x86_64-linux" "aarch64-linux"];
+    pkgsFor = lib.genAttrs systems (system:
+      import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      });
+  in {
     nixosConfigurations = {
-      nix280 = nixpkgs.lib.nixosSystem {
+      nix280 = lib.nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
-          ./configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.tufourn = import ./home;
-            home-manager.extraSpecialArgs = {inherit inputs;};
-          }
+          ./hosts/nix280
         ];
+      };
+    };
+
+    homeConfigurations = {
+      "tufourn@nix280" = lib.homeManagerConfiguration {
+        modules = [./home];
+        pkgs = pkgsFor.x86_64-linux;
+        extraSpecialArgs = {
+          username = "tufourn";
+          inherit inputs;
+        };
       };
     };
   };

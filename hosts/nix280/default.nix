@@ -59,6 +59,7 @@
     git
     vim
     wl-clipboard
+    home-manager
   ];
 
   environment.variables.EDITOR = "vim";
