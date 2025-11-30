@@ -41,6 +41,10 @@ in {
             rust-analyzer
             rustfmt
           ];
+          haskell = with pkgs; [
+            haskell-language-server
+            ormolu
+          ];
         };
 
         startupPlugins = {
@@ -100,6 +104,7 @@ in {
             lua = true;
             nix = true;
             rust = true;
+            haskell = true;
           };
         };
       };

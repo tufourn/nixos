@@ -85,6 +85,11 @@ local M = {
         enabled = nixCats("rust") or false,
         lsp = {},
     },
+    {
+        "hls",
+        enabled = nixCats("haskell") or false,
+        lsp = {},
+    },
 }
 
 return M

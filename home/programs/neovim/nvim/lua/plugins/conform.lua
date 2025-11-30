@@ -17,6 +17,7 @@ local M = {
                     lua = nixCats("lua") and { "stylua" } or nil,
                     nix = nixCats("nix") and { "alejandra" } or nil,
                     rust = nixCats("rust") and { "rustfmt" } or nil,
+                    haskell = nixCats("haskell") and { "ormolu" } or nil,
                 },
                 format_on_save = function(bufnr)
                     local disable_filetypes = { c = true, cpp = true }
