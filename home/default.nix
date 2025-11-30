@@ -21,6 +21,7 @@
     ./modules/i18n.nix
     ./modules/git.nix
     ./modules/packages.nix
+    ./modules/zsh.nix
   ];
 
   home.stateVersion = "25.05";

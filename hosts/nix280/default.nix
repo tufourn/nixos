@@ -31,10 +31,13 @@
     enable = true;
   };
 
+  programs.zsh.enable = true;
+
   users.users.tufourn = {
     isNormalUser = true;
     description = "tufourn";
     extraGroups = ["docker" "networkmanager" "wheel"];
+    shell = pkgs.zsh;
     packages = with pkgs; [];
   };
 
