@@ -25,23 +25,42 @@
       });
   in {
     nixosConfigurations = {
-      nix280 = lib.nixosSystem {
-        specialArgs = {inherit inputs;};
-        modules = [
-          ./hosts/nix280
-        ];
-      };
-    };
-
-    homeConfigurations = {
-      "tufourn@nix280" = lib.homeManagerConfiguration {
-        modules = [./home];
-        pkgs = pkgsFor.x86_64-linux;
-        extraSpecialArgs = {
-          username = "tufourn";
-          inherit inputs;
+      nix280 = let
+        username = "tufourn";
+      in
+        lib.nixosSystem {
+          specialArgs = {inherit inputs;};
+          modules = [
+            ./hosts/nix280
+            home-manager.nixosModules.default
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${username} = ./home;
+                extraSpecialArgs = {inherit inputs username;};
+              };
+            }
+          ];
         };
-      };
+      zephyrus = let
+        username = "tufourn";
+      in
+        lib.nixosSystem {
+          specialArgs = {inherit inputs;};
+          modules = [
+            ./hosts/zephyrus
+            home-manager.nixosModules.default
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${username} = ./home;
+                extraSpecialArgs = {inherit inputs username;};
+              };
+            }
+          ];
+        };
     };
   };
 }

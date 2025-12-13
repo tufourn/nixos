@@ -1,6 +1,5 @@
 {inputs, ...}: {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
     ./locale.nix
     ./nix.nix
     ./keyboard.nix
