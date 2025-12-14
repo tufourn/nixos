@@ -78,6 +78,10 @@
       };
 
       Preferences = {
+        "general.autoScroll" = {
+          Value = 1;
+          Status = "locked";
+        };
         "browser.uidensity" = {
           Value = 1;
           Status = "locked";

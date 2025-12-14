@@ -83,7 +83,9 @@ local M = {
     {
         "rust_analyzer",
         enabled = nixCats("rust") or false,
-        lsp = {},
+        lsp = {
+            on_attach = lsp_on_attach,
+        },
     },
     {
         "hls",

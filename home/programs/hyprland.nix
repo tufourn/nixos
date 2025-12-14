@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     hyprlock
     hypridle
+    hyprpicker
   ];
 
   programs.hyprlock = {
