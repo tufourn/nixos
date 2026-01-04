@@ -104,6 +104,8 @@
         "$mod, Q, killactive,"
         "$mod, D, exec, tofi-run | xargs hyprctl dispatch exec"
 
+        "$mod, X, exec, hyprlock"
+
         "$mod, h, movefocus, l"
         "$mod, l, movefocus, r"
         "$mod, k, movefocus, u"

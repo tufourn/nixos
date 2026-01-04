@@ -33,7 +33,10 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wl-clipboard
+    qmk
   ];
+
+  hardware.keyboard.qmk.enable = true;
 
   programs.hyprland.enable = true;
 
