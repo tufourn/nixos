@@ -21,8 +21,19 @@
   };
 
   environment.systemPackages = with pkgs; [
+    git
+
+    vim
     unzip
+    p7zip
     gnumake
+    curl
+    wget
+    ripgrep
+    fd
+    tree
+    htop
+    tmux
   ];
 
   environment.variables.EDITOR = "vim";
