@@ -26,6 +26,14 @@ local M = {
         end,
     },
     {
+        "clangd",
+        enabled = nixCats("c") or false,
+        lsp = {
+            filetypes = { "c", "cpp", "objc", "objcpp" },
+            on_attach = lsp_on_attach,
+        },
+    },
+    {
         "lua_ls",
         enabled = nixCats("lua") or false,
         lsp = {

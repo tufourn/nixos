@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./locale.nix
     ./nix.nix
@@ -15,6 +19,11 @@
     git.enable = true;
     vim.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    unzip
+    gnumake
+  ];
 
   environment.variables.EDITOR = "vim";
 

@@ -29,6 +29,12 @@ in {
             fd
             tree-sitter
           ];
+          c = with pkgs; [
+            clang-tools
+            valgrind
+            gcc
+            gdb
+          ];
           lua = with pkgs; [
             lua-language-server
             stylua
@@ -101,6 +107,7 @@ in {
           };
           categories = {
             general = true;
+            c = true;
             lua = true;
             nix = true;
             rust = true;
