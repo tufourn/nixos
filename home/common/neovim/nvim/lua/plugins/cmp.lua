@@ -5,7 +5,11 @@ local M = {
     on_require = "blink",
     after = function()
         require("blink.cmp").setup({
-            keymap = { preset = "default" },
+            keymap = {
+                preset = "default",
+                ["<C-l>"] = { "snippet_forward", "fallback" },
+                ["<C-h>"] = { "snippet_backward", "fallback" },
+            },
             appearance = {
                 nerd_font_variant = "mono",
             },

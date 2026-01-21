@@ -12,6 +12,10 @@
         email = "noreply@tufourn.com";
         name = "Tuan Nguyen";
       };
+      ui = {
+        paginate = "never";
+        default-command = "log";
+      };
     };
   };
 }

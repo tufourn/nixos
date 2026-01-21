@@ -5,5 +5,7 @@
     ../../programs/kitty.nix
     ../../programs/waybar
     ../../programs/tofi.nix
+
+    ./hyprland.nix
   ];
 }
