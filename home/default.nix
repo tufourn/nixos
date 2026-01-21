@@ -8,16 +8,20 @@
 }: {
   home.username = username;
   home.homeDirectory = "/home/${username}";
+  home.stateVersion = "25.05";
 
-  imports = [
-    ./common
-
-    ./programs/librewolf.nix
-    ./programs/hyprland.nix
-    ./programs/kitty.nix
-    ./programs/waybar
-    ./programs/tofi.nix
+  home.packages = with pkgs; [
+    fastfetch
+    brightnessctl
+    eza
+    fd
   ];
 
-  home.stateVersion = "25.05";
+  imports =
+    [
+      ./common
+    ]
+    ++ lib.optional
+    (builtins.pathExists ./hosts/${hostname})
+    ./hosts/${hostname};
 }

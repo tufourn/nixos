@@ -1,8 +1,4 @@
 {pkgs, ...}: {
-  home.packages = [
-    pkgs.tofi
-  ];
-
   programs.tofi = {
     enable = true;
     settings = {
