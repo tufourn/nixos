@@ -1,3 +1,4 @@
+# flake.nix
 {
   description = "tufourn's NixOS configuration";
 
@@ -7,7 +8,6 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
   };
 
@@ -17,50 +17,47 @@
     ...
   }: let
     lib = nixpkgs.lib // home-manager.lib;
-    systems = ["x86_64-linux" "aarch64-linux"];
-    pkgsFor = lib.genAttrs systems (system:
-      import nixpkgs {
+    mkHost = {
+      hostname,
+      system,
+      username,
+      hostModule,
+    }:
+      lib.nixosSystem {
         inherit system;
-        config.allowUnfree = true;
-      });
+        specialArgs = {
+          inherit inputs hostname username;
+        };
+        modules = [
+          hostModule
+          home-manager.nixosModules.default
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.${username} = import ./home;
+              extraSpecialArgs = {
+                inherit inputs hostname username;
+              };
+            };
+          }
+        ];
+      };
   in {
     nixosConfigurations = {
-      nix280 = let
+      nix280 = mkHost {
+        hostname = "nix280";
+        system = "x86_64-linux";
         username = "tufourn";
-      in
-        lib.nixosSystem {
-          specialArgs = {inherit inputs;};
-          modules = [
-            ./hosts/nix280
-            home-manager.nixosModules.default
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${username} = ./home;
-                extraSpecialArgs = {inherit inputs username;};
-              };
-            }
-          ];
-        };
-      zephyrus = let
+        hostModule = ./hosts/nix280;
+      };
+
+      zephyrus = mkHost {
+        hostname = "zephyrus";
+        system = "x86_64-linux";
         username = "tufourn";
-      in
-        lib.nixosSystem {
-          specialArgs = {inherit inputs;};
-          modules = [
-            ./hosts/zephyrus
-            home-manager.nixosModules.default
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${username} = ./home;
-                extraSpecialArgs = {inherit inputs username;};
-              };
-            }
-          ];
-        };
+        hostModule = ./hosts/zephyrus;
+      };
     };
   };
 }
