@@ -45,9 +45,26 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wl-clipboard
+
+    unzip
+    p7zip
+    gnumake
+    curl
+    wget
+    ripgrep
+    fd
+    tree
+    htop
+    tmux
   ];
 
   programs.hyprland.enable = true;
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

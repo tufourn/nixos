@@ -58,6 +58,16 @@
         username = "tufourn";
         hostModule = ./hosts/zephyrus;
       };
+
+      thinkcentre = lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./hosts/thinkcentre
+        ];
+      };
     };
   };
 }

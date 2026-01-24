@@ -34,11 +34,28 @@
   environment.systemPackages = with pkgs; [
     wl-clipboard
     qmk
+
+    unzip
+    p7zip
+    gnumake
+    curl
+    wget
+    ripgrep
+    fd
+    tree
+    htop
+    tmux
   ];
 
   hardware.keyboard.qmk.enable = true;
 
   programs.hyprland.enable = true;
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+  };
 
   system.stateVersion = "25.05";
 }
