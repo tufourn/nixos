@@ -1,0 +1,18 @@
+keys:
+  - &zephyrus age1z53vl65jvy682yv4zrahcs8ek7sw3tt5knljmsa63t88tzgc445qvgjn4g
+  - &thinkcentre age1mqxq5ypjrxlxrhyel5lgammpqreu4uqsm306fr6y7kxz4t4rzpcs7sy7tf
+
+creation_rules:
+  - path_regex: secrets/shared\.yaml$
+    key_groups:
+      - age:
+        - *zephyrus
+        - *thinkcentre
+  - path_regex: secrets/zephyrus\.yaml$
+    key_groups:
+      - age:
+        - *zephyrus
+  - path_regex: secrets/thinkcentre\.yaml$
+    key_groups:
+      - age:
+        - *thinkcentre

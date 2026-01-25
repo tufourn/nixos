@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  username,
   ...
 }: {
   imports = [
@@ -21,9 +22,9 @@
 
   programs.zsh.enable = true;
 
-  users.users.tufourn = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "tufourn";
+    description = "${username}";
     extraGroups = ["docker" "networkmanager" "wheel"];
     shell = pkgs.zsh;
     packages = with pkgs; [];
@@ -33,8 +34,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wl-clipboard
-    qmk
-
     unzip
     p7zip
     gnumake
@@ -45,9 +44,8 @@
     tree
     htop
     tmux
+    sops
   ];
-
-  hardware.keyboard.qmk.enable = true;
 
   programs.hyprland.enable = true;
 
@@ -55,6 +53,11 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
+  };
+
+  sops = {
+    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    defaultSopsFile = ../../secrets/zephyrus.yaml;
   };
 
   system.stateVersion = "25.05";

@@ -1,4 +1,3 @@
-# flake.nix
 {
   description = "tufourn's NixOS configuration";
 
@@ -8,12 +7,17 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
   };
 
   outputs = inputs @ {
     nixpkgs,
     home-manager,
+    sops-nix,
     ...
   }: let
     lib = nixpkgs.lib // home-manager.lib;
@@ -30,6 +34,7 @@
         };
         modules = [
           hostModule
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.default
           {
             home-manager = {
@@ -66,6 +71,7 @@
         };
         modules = [
           ./hosts/thinkcentre
+          sops-nix.nixosModules.sops
         ];
       };
     };
