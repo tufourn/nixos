@@ -126,12 +126,35 @@ in {
     # enableRegistration = true; # needed for first user
   };
 
+  sops.secrets."paperless/secret_key".owner = "paperless";
+  sops.secrets."paperless/admin_password".owner = "paperless";
+  sops.templates.paperless-env = {
+    owner = "paperless";
+    content = ''
+      PAPERLESS_SECRET_KEY=${config.sops.placeholder."paperless/secret_key"}
+      PAPERLESS_URL=https://paperless.${config.sops.placeholder.vps_domain}
+      PAPERLESS_ADMIN_USER=admin
+      PAPERLESS_ADMIN_PASSWORD=${config.sops.placeholder."paperless/admin_password"}
+      PAPERLESS_OCR_LANGUAGE="eng+vie"
+    '';
+  };
+
+  services.paperless = {
+    enable = true;
+    environmentFile = config.sops.templates.paperless-env.path;
+    mediaDir = "/mnt/media/paperless/documents";
+    dataDir = "/mnt/media/paperless";
+    address = "0.0.0.0";
+    port = 28981;
+  };
+
   networking.firewall.allowedTCPPorts = [
     3000 # linkwarden
     3001 # uptime-kuma
     4533 # navidrome
     8000 # audiobookshelf
     8003 # calibre-web
+    28981 # paperless-ngx
   ];
   networking.firewall.allowedUDPPorts = [51820];
 
