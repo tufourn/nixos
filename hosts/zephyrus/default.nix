@@ -20,12 +20,19 @@
     enable = true;
   };
 
+  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.qemu = {
+    package = pkgs.qemu_kvm;
+    runAsRoot = true;
+  };
+  environment.variables.LIBVIRT_DEFAULT_URI = "qemu:///system";
+
   programs.zsh.enable = true;
 
   users.users.${username} = {
     isNormalUser = true;
     description = "${username}";
-    extraGroups = ["docker" "networkmanager" "wheel"];
+    extraGroups = ["docker" "networkmanager" "wheel" "libvirtd" "kvm"];
     shell = pkgs.zsh;
     packages = with pkgs; [];
   };
@@ -45,6 +52,8 @@
     htop
     tmux
     sops
+
+    azure-cli
   ];
 
   programs.hyprland.enable = true;
@@ -59,6 +68,8 @@
     age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     defaultSopsFile = ../../secrets/zephyrus.yaml;
   };
+
+  programs.virt-manager.enable = true;
 
   system.stateVersion = "25.05";
 }

@@ -1,8 +1,12 @@
 {...}: {
   programs.git = {
     enable = true;
-    userName = "Tuan Nguyen";
-    userEmail = "noreply@tufourn.com";
+    settings = {
+      user = {
+        name = "Tuan Nguyen";
+        email = "noreply@tufourn.com";
+      };
+    };
   };
 
   programs.jujutsu = {
