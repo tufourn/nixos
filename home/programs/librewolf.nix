@@ -17,8 +17,13 @@
             URLTemplate = "https://kagi.com/search?q={searchTerms}";
             SuggestURLTemplate = "https://kagi.com/api/autosuggest?q={searchTerms}";
           }
+          {
+            Name = "SearxNG";
+            URLTemplate = "https://opnxng.com/search?q={searchTerms}";
+            SuggestURLTemplate = "https://opnxng.com/autocompleter?q={searchTerms}";
+          }
         ];
-        Default = "Kagi";
+        Default = "SearxNG";
       };
       SearchSuggestEnabled = true;
       Cookies = {
@@ -73,6 +78,11 @@
         # Old Reddit Redirect
         "{9063c2e9-e07c-4c2c-9646-cfe7ca8d0498}" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4526031/latest.xpi";
+          installation_mode = "force_installed";
+        };
+        # DeArrow
+        "deArrow@ajay.app" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4656721/latest.xpi";
           installation_mode = "force_installed";
         };
       };
