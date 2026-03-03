@@ -20,19 +20,12 @@
     enable = true;
   };
 
-  virtualisation.libvirtd.enable = true;
-  virtualisation.libvirtd.qemu = {
-    package = pkgs.qemu_kvm;
-    runAsRoot = true;
-  };
-  environment.variables.LIBVIRT_DEFAULT_URI = "qemu:///system";
-
   programs.zsh.enable = true;
 
   users.users.${username} = {
     isNormalUser = true;
     description = "${username}";
-    extraGroups = ["docker" "networkmanager" "wheel" "libvirtd" "kvm"];
+    extraGroups = ["docker" "networkmanager" "wheel" "kvm" "vboxusers"];
     shell = pkgs.zsh;
     packages = with pkgs; [];
   };
@@ -53,8 +46,39 @@
     tmux
     sops
 
-    azure-cli
+    flameshot
+    grim
+
+    vagrant
   ];
+
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = ["tufourn"];
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        # Shows battery charge of connected devices on supported
+        # Bluetooth adapters. Defaults to 'false'.
+        Experimental = true;
+        # When enabled other devices can connect faster to us, however
+        # the tradeoff is increased power consumption. Defaults to
+        # 'false'.
+        FastConnectable = true;
+      };
+      Policy = {
+        # Enable all controllers when they are found. This includes
+        # adapters present on start as well as adapters that are plugged
+        # in later on. Defaults to 'true'.
+        AutoEnable = true;
+      };
+    };
+  };
+
+  services.blueman.enable = true;
 
   programs.hyprland.enable = true;
 
@@ -68,8 +92,6 @@
     age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     defaultSopsFile = ../../secrets/zephyrus.yaml;
   };
-
-  programs.virt-manager.enable = true;
 
   system.stateVersion = "25.05";
 }

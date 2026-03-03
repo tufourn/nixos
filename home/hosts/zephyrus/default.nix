@@ -8,5 +8,6 @@
     ../../programs/yazi.nix
 
     ./hyprland.nix
+    ./flameshot.nix
   ];
 }
