@@ -3,77 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixCats.url = "github:BirdeeHub/nixCats-nvim";
+
+    import-tree.url = "github:vic/import-tree";
+    flake-file.url = "github:vic/flake-file";
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    home-manager,
-    sops-nix,
-    ...
-  }: let
-    lib = nixpkgs.lib // home-manager.lib;
-    mkHost = {
-      hostname,
-      system,
-      username,
-      hostModule,
-    }:
-      lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs hostname username;
-        };
-        modules = [
-          hostModule
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.default
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${username} = import ./home;
-              extraSpecialArgs = {
-                inherit inputs hostname username;
-              };
-            };
-          }
-        ];
-      };
-  in {
-    nixosConfigurations = {
-      nix280 = mkHost {
-        hostname = "nix280";
-        system = "x86_64-linux";
-        username = "tufourn";
-        hostModule = ./hosts/nix280;
-      };
-
-      zephyrus = mkHost {
-        hostname = "zephyrus";
-        system = "x86_64-linux";
-        username = "tufourn";
-        hostModule = ./hosts/zephyrus;
-      };
-
-      thinkcentre = lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-        };
-        modules = [
-          ./hosts/thinkcentre
-          sops-nix.nixosModules.sops
-        ];
-      };
-    };
-  };
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
 }
