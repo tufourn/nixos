@@ -8,7 +8,72 @@
       "full-screen-api.warning.delay" = 0;
       "full-screen-api.warning.timeout" = 0;
       "browser.startup.page" = 3; # Restore previous session
+      "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+      "permissions.default.shortcuts" = 2;
+      "sidebar.revamp" = true;
+      "sidebar.verticalTabs" = true;
+      "sidebar.position_start" = false;
+      "toolkit.tabmanager.enabled" = false;
+      "toolkit.tabbox.switchByScrolling" = true;
+      "browser.tabs.dragDrop.pinInteractionCue.delayMS" = 999999;
     };
+
+    profiles.default = {
+      id = 0;
+      isDefault = true;
+      userChrome = ''
+        #tabs-newtab-button,
+        #context_pinTab,
+        #alltabs-button,
+        #new-tab-button {
+          display: none !important;
+        };
+
+        #tabbrowser-tabs {
+          counter-reset: tab-counter;
+        }
+
+        .tabbrowser-tab:nth-child(-n+8) {
+          counter-increment: tab-counter;
+        }
+
+        .tabbrowser-tab:nth-child(-n+8) .tab-content::before {
+          content: counter(tab-counter) "";
+          position: absolute;
+          left: 0.2em;
+          top: 50%;
+          transform: translateY(-50%);
+          min-width: 1.2em;
+          text-align: center;
+          font-size: 0.75em;
+          font-weight: bold;
+          opacity: 0.5;
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        .tabbrowser-tab:nth-child(-n+8) .tabcontent {
+          padding-left: 1.4em !important;
+        }
+
+        .tab-background {
+          border-radius: 0 !important;
+          margin: 0 !important;
+          margin-block: 0 !important;
+          padding: 0 !important;
+        }
+
+        .tabbrowser-tab[selected] .tab-background {
+          background: rgba(128, 128, 128, 0.4) !important;
+        }
+
+        .tabbrowser-tab[selected] .tab-text {
+          font-weight: bold !important;
+          opacity: 1 !important;
+        }
+      '';
+    };
+
     policies = {
       SearchEngines = {
         Add = [
@@ -16,11 +81,6 @@
             Name = "Kagi";
             URLTemplate = "https://kagi.com/search?q={searchTerms}";
             SuggestURLTemplate = "https://kagi.com/api/autosuggest?q={searchTerms}";
-          }
-          {
-            Name = "SearxNG";
-            URLTemplate = "https://opnxng.com/search?q={searchTerms}";
-            SuggestURLTemplate = "https://opnxng.com/autocompleter?q={searchTerms}";
           }
           {
             Name = "Google";
@@ -33,7 +93,6 @@
       SearchSuggestEnabled = true;
       Cookies = {
         Allow = [
-          "http://kagi.com"
           "https://kagi.com"
         ];
       };
@@ -74,6 +133,7 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4598130/latest.xpi";
           installation_mode = "force_installed";
           private_browsing = true;
+          default_area = "menupanel";
         };
         # Reddit Enhancement Suite
         "jid1-xUfzOsOFlzSOXg@jetpack" = {
@@ -89,6 +149,13 @@
         "deArrow@ajay.app" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4656721/latest.xpi";
           installation_mode = "force_installed";
+          default_area = "menupanel";
+        };
+        # Tampermonkey
+        "firefox@tampermonkey.net" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4624137/latest.xpi";
+          installation_mode = "force_installed";
+          private_browsing = true;
         };
       };
 
