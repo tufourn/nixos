@@ -22,8 +22,13 @@
             URLTemplate = "https://opnxng.com/search?q={searchTerms}";
             SuggestURLTemplate = "https://opnxng.com/autocompleter?q={searchTerms}";
           }
+          {
+            Name = "Google";
+            URLTemplate = "https://google.com/search?q={searchTerms}";
+            SuggestURLTemplate = "https://suggestqueries.google.com/complete/search?client=firefox&q={searchTerms}";
+          }
         ];
-        Default = "SearxNG";
+        Default = "Kagi";
       };
       SearchSuggestEnabled = true;
       Cookies = {

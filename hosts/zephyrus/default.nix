@@ -50,6 +50,8 @@
     grim
 
     vagrant
+
+    openconnect
   ];
 
   virtualisation.virtualbox.host.enable = true;
