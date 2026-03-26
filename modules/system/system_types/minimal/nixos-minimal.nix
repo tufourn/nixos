@@ -2,6 +2,14 @@
   # default settings needed for all nixosConfigurations
 
   flake.modules.nixos.system-minimal = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [
+      git
+      vim
+      tmux
+    ];
+
+    environment.variables.EDITOR = "vim";
+
     nixpkgs.overlays = [
       (final: _prev: {
         unstable = import inputs.nixpkgs-unstable {

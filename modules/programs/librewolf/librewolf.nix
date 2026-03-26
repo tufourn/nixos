@@ -1,9 +1,5 @@
 {
   flake.modules.homeManager.librewolf = {pkgs, ...}: {
-    home.packages = with pkgs; [
-      librewolf
-    ];
-
     programs.librewolf = {
       enable = true;
       settings = {
