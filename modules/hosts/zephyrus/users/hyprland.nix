@@ -1,4 +1,8 @@
-{inputs, lib, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   flake.modules.nixos.zephyrus = {
     home-manager.users.tufourn = {
       wayland.windowManager.hyprland.settings.monitor = lib.mkForce [
