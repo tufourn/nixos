@@ -52,11 +52,9 @@
     vagrant
 
     openconnect
-  ];
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  users.extraGroups.vboxusers.members = ["tufourn"];
+    nyxt
+  ];
 
   hardware.bluetooth = {
     enable = true;
