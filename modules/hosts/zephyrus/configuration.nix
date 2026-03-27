@@ -7,10 +7,17 @@
       keyboard
       locale
       nh
+      nvidia
+      nvidia-prime
       sops
       systemd-boot
       system-minimal
     ];
+
+    hardware.nvidia.prime = {
+      amdgpuBusId = "PCI:4:0:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
 
     environment.systemPackages = with pkgs; [
       wl-clipboard
