@@ -18,7 +18,7 @@
     };
 
     sops = {
-      age.keyFile = "/home/tufourn/.config/sops/age/keys.txt";
+      age.keyFile = "${config.users.users.tufourn.home}/.config/sops/age/keys.txt";
       defaultSopsFile = ../../../secrets/thinkcentre.yaml;
     };
 

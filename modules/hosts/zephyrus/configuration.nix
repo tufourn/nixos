@@ -9,7 +9,6 @@
       nh
       nvidia
       nvidia-prime
-      sops
       systemd-boot
       system-minimal
     ];
@@ -35,10 +34,5 @@
       grim
       vagrant
     ];
-
-    sops = {
-      age.keyFile = "/home/tufourn/.config/sops/age/keys.txt";
-      defaultSopsFile = ../../../secrets/zephyrus.yaml;
-    };
   };
 }
