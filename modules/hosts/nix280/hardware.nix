@@ -1,7 +1,11 @@
 {lib, ...}: {
-  flake.modules.nixos.nix280 = {config, ...}: {
+  flake.modules.nixos.nix280 = {
+    config,
+    modulesPath,
+    ...
+  }: {
     imports = [
-      (lib.mkDefault {}) # ensure modulesPath is available
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
     boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod"];
