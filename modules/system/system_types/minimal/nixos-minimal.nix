@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   # default settings needed for all nixosConfigurations
 
   flake.modules.nixos.system-minimal = {pkgs, ...}: {
@@ -19,7 +23,7 @@
       })
     ];
     nixpkgs.config.allowUnfree = true;
-    system.stateVersion = "25.05";
+    system.stateVersion = lib.mkDefault "25.05";
 
     nix.settings = {
       substituters = [

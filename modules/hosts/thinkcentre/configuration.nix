@@ -1,5 +1,13 @@
-{inputs, ...}: {
-  flake.modules.nixos.thinkcentre = {config, pkgs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
+  flake.modules.nixos.thinkcentre = {
+    config,
+    pkgs,
+    ...
+  }: {
     imports = with inputs.self.modules.nixos; [
       docker
       locale
@@ -133,6 +141,8 @@
       28981 # paperless-ngx
     ];
     networking.firewall.allowedUDPPorts = [51820];
+
+    services.openssh.settings.PasswordAuthentication = lib.mkForce true;
 
     system.stateVersion = "25.11";
   };
