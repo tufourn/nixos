@@ -9,6 +9,11 @@
     boot.kernelModules = ["kvm-amd"];
     boot.extraModulePackages = [];
 
+    hardware.nvidia.prime = {
+      amdgpuBusId = "PCI:4:0:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+
     nixpkgs.hostPlatform = "x86_64-linux";
     hardware.cpu.amd.updateMicrocode = true;
   };

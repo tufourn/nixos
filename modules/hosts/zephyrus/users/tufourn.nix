@@ -7,6 +7,7 @@
     home-manager.users.tufourn = {
       imports = with inputs.self.modules.homeManager; [
         sops
+        signal-desktop
       ];
 
       sops = {
