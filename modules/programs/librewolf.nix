@@ -14,9 +14,35 @@
         "sidebar.revamp" = true;
         "sidebar.verticalTabs" = true;
         "sidebar.position_start" = false;
+        "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
+        "sidebar.animation.enabled" = false;
+        "sidebar.expandOnHover" = false;
+        "sidebar.visibility" = "hide-sidebar"; # this doesn't work? need to set manually
         "toolkit.tabmanager.enabled" = false;
         "toolkit.tabbox.switchByScrolling" = true;
         "browser.tabs.dragDrop.pinInteractionCue.delayMS" = 999999;
+        "browser.uiCustomization.state" = builtins.toJSON {
+          placements = {
+            nav-bar = [
+              "back-button"
+              "forward-button"
+              "stop-reload-button"
+              "urlbar-container"
+              "unified-extensions-button"
+              "downloads-button"
+              "sidebar-button"
+            ];
+            toolbar-menubar = ["menubar-items"];
+            TabsToolbar = [];
+            PersonalToolbar = [];
+            unified-extensions-area = [];
+            widget-overflow-fixed-list = [];
+          };
+          seen = ["downloads-button" "sidebar-button" "unified-extensions-button"];
+          dirtyAreaCache = ["nav-bar" "TabsToolbar" "PersonalToolbar"];
+          currentVersion = 20;
+          newElementCount = 0;
+        };
       };
 
       profiles.default = {
