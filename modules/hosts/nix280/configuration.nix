@@ -6,6 +6,8 @@
       keyboard
       locale
       nh
+      battery
+      bluetooth
       systemd-boot
       system-minimal
     ];
