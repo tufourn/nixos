@@ -132,12 +132,24 @@
       port = 28981;
     };
 
+    services.jellyfin = {
+      enable = true;
+      dataDir = "/mnt/media/jellyfin/library";
+      group = "media";
+    };
+    environment.systemPackages = [
+      pkgs.jellyfin
+      pkgs.jellyfin-web
+      pkgs.jellyfin-ffmpeg
+    ];
+
     networking.firewall.allowedTCPPorts = [
       3000 # linkwarden
       3001 # uptime-kuma
       4533 # navidrome
       8000 # audiobookshelf
       8003 # calibre-web
+      8096 # jellyfin
       28981 # paperless-ngx
     ];
     networking.firewall.allowedUDPPorts = [51820];

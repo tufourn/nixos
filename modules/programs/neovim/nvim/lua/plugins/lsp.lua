@@ -100,6 +100,22 @@ local M = {
         enabled = nixCats("haskell") or false,
         lsp = {},
     },
+    {
+        "gopls",
+        enabled = nixCats("go") or false,
+        lsp = {
+            filetypes = { "go", "gomod", "gowork", "gotmpl" },
+            settings = {
+                gopls = {
+                    analyses = {
+                        unusedparams = true,
+                    },
+                    staticcheck = true,
+                    gofumpt = true,
+                },
+            },
+        },
+    },
 }
 
 return M

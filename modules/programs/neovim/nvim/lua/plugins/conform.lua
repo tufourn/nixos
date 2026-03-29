@@ -19,6 +19,7 @@ local M = {
                     rust = nixCats("rust") and { "rustfmt" } or nil,
                     haskell = nixCats("haskell") and { "ormolu" } or nil,
                     c = nixCats("c") and { "clang-format" } or nil,
+                    go = nixCats("go") and { "goimports", "gofmt" } or nil,
                 },
                 format_on_save = function(bufnr)
                     local disable_filetypes = { c = true, cpp = true }

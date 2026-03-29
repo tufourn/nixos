@@ -45,6 +45,11 @@
               haskell-language-server
               ormolu
             ];
+            go = with pkgs; [
+              gopls
+              gotools
+              delve
+            ];
           };
 
           startupPlugins = {
@@ -106,6 +111,7 @@
               nix = true;
               rust = true;
               haskell = true;
+              go = true;
             };
           };
         };
