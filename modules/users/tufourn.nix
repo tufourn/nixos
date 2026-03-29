@@ -24,6 +24,7 @@ in {
         fonts
         git
         hyprland
+        noctalia
         i18n
         kitty
         librewolf

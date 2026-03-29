@@ -71,7 +71,7 @@
       settings = {
         "$mod" = "SUPER";
         "exec-once" = [
-          "waybar"
+          "noctalia-shell"
         ];
 
         monitor = ", preferred, auto, 1";
