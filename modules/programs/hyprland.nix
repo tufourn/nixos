@@ -97,11 +97,12 @@
         animations.enabled = false;
 
         input = {
-          kb_layout = "us";
-          kb_variant = "dvorak";
-          kb_options = "ctrl:nocaps";
+          kb_layout = "us,us";
+          kb_variant = "dvorak,";
+          kb_options = "ctrl:nocaps,grp:alt_shift_toggle";
           repeat_delay = 200;
           repeat_rate = 30;
+          resolve_binds_by_sym = 1;
         };
 
         bind = [
