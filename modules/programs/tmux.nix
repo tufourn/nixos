@@ -16,6 +16,7 @@
       ];
 
       extraConfig = ''
+        set -g renumber-windows on
         set -g default-terminal "xterm-256color"
         set -ga terminal-overrides ",*256col*:Tc"
         set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'

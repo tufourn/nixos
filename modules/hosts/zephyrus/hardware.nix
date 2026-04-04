@@ -14,6 +14,8 @@
       nvidiaBusId = "PCI:1:0:0";
     };
 
+    hardware.keyboard.qmk.enable = true;
+
     nixpkgs.hostPlatform = "x86_64-linux";
     hardware.cpu.amd.updateMicrocode = true;
   };
