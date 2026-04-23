@@ -143,6 +143,11 @@
       pkgs.jellyfin-ffmpeg
     ];
 
+    services.deluge = {
+      enable = true;
+      web.enable = true;
+    };
+
     networking.firewall.allowedTCPPorts = [
       3000 # linkwarden
       3001 # uptime-kuma
@@ -150,6 +155,7 @@
       8000 # audiobookshelf
       8003 # calibre-web
       8096 # jellyfin
+      8112 # deluge
       28981 # paperless-ngx
     ];
     networking.firewall.allowedUDPPorts = [51820];
