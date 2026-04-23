@@ -7,6 +7,7 @@ in {
     imports = with inputs.self.modules.homeManager; [
       neovim
       tmux
+      opencode
     ];
 
     home.username = username;

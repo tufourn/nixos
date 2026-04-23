@@ -9,6 +9,7 @@
         sops
         signal-desktop
         thunderbird
+        opencode
       ];
 
       sops = {
