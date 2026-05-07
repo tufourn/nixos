@@ -9,6 +9,7 @@
         sops
         signal-desktop
         thunderbird
+        aerc
       ];
 
       sops = {
